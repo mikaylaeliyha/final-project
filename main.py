@@ -24,9 +24,14 @@ class GifsHandler (webapp2.RequestHandler):
     def get(self):
         gifs_template = jinja_env.get_template('gifs.html')
         self.response.write(gifs_template.render())
+class TipsHandler (webapp2.RequestHandler):
+    def get(self):
+        tips_template = jinja_env.get_template('tips.html')
+        self.response.write(tips_template.render())
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/music', MusicHandler),
     ('/gifs', GifsHandler),
+    ('/tips', TipsHandler),
 ], debug=True)
