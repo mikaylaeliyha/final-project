@@ -5,6 +5,8 @@ threadsafe: True
 handlers:
 - url: /static
   static_dir: static
+- url: /style
+  static_dir: style
 - url: /.*
   script: main.app
 
