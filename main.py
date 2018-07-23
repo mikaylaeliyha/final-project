@@ -12,6 +12,4 @@ jinja_env = jinja2.Environment(
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
-    ('/recents', RecentsPage),
-    ('/popular', PopularPage)
 ])
