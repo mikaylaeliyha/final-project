@@ -1,5 +1,5 @@
 body {
-  background-color: #e4e3e5;
+  background-color: #dcdfed;
 }
 
 ul {
@@ -15,6 +15,7 @@ li {
 }
 
 li a {
+    font-family: 'Quicksand', sans-serif;
     display: block;
     color: white;
     text-align: center;
@@ -38,13 +39,6 @@ h2 {
   font-size: 40px;
 }
 
-img {
-  height: 400px;
-  width: 600px;
-  padding-bottom: 10px;
-  padding-left: 15px;
-}
-
 .button {
     background-color: #333;
     border: none;
@@ -56,16 +50,27 @@ img {
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-    margin-bottom: 30px;
+    margin-bottom: 70px;
+    margin-top: 30px;
+}
+
+img {
+  height: 500px;
+  width: 700px;
+  padding-bottom: 10px;
+  padding-left: 15px;
 }
 
 #about {
   background-color: #FFF;
   border: none;
-  padding: 100px;
+  padding: 50px 300px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   margin-bottom: 50px;
-  margin-left: 100px;
+}
+
+p {
+  font-family: 'Quicksand', sans-serif;
 }

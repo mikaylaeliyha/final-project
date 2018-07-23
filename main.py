@@ -10,6 +10,23 @@ jinja_env = jinja2.Environment(
     loader= jinja2.FileSystemLoader(
         os.path.dirname(__file__) + '/templates'))
 
+class MainHandler (webapp2.RequestHandler):
+    def get(self):
+        main_template = jinja_env.get_template('main.html')
+        self.response.write(main_template.render())
+
+class MusicHandler (webapp2.RequestHandler):
+    def get(self):
+        music_template = jinja_env.get_template('music.html')
+        self.response.write(music_template.render())
+
+class GifsHandler (webapp2.RequestHandler):
+    def get(self):
+        gifs_template = jinja_env.get_template('gifs.html')
+        self.response.write(gifs_template.render())
+
 app = webapp2.WSGIApplication([
-    ('/', MainPage),
-])
+    ('/', MainHandler),
+    ('/music', MusicHandler),
+    ('/gifs', GifsHandler),
+], debug=True)

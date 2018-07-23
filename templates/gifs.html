@@ -16,17 +16,8 @@
       <li><a href="/gifs">Gifs</a>
     </ul>
     <center><h1>In Tune</h1></center>
-    <center>
-      <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736881__340.jpg">
-    </center>
-    <center><button class="button">Login</button></center>
-    <center>
-      <div id="about">
-        <h2>About Us</h2>
-        <p>We are a group of individuals who are looking for methods people can follow to find peace and relaxation in stressful situations or times of need.</p>
-        <h2>What you can do</h2>
-        <p></p>
-      </div>
-    </center>
+    {% for url in gif_urls %}
+    <img src = "{{url}}" />
+    {% endfor %}
   </body>
 </html>
