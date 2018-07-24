@@ -26,7 +26,7 @@ class GifsHandler (webapp2.RequestHandler):
         if search_term:
             updateSearchCount(search_term)
         else:
-            search_term = "calming"
+            search_term = "satisfying"
         params = {'api_key': 'F3eg1VxjOgwzWvn4J49lhRAFXBBh6Z0Z', #api key is from giphy.com
                 'q': search_term,
                 'rating': 'g',
