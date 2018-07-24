@@ -74,3 +74,11 @@ img {
 p {
   font-family: 'Quicksand', sans-serif;
 }
+
+.gifs {
+  height: 350px;
+  width: 550px;
+  margin-left: 25px;
+  margin-right: 25px;
+
+}
