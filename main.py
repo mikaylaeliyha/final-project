@@ -55,6 +55,12 @@ class TipsHandler (webapp2.RequestHandler):
         tips_template = jinja_env.get_template('tips.html')
         self.response.write(tips_template.render())
 
+class UserSearch(ndb.Model):
+    firstname = ndb.StringProperty(required=True)
+    lastname = ndb.StringProperty(required=True)
+    country = ndb.StringProperty(required=True)
+    comments = ndb.StringProperty(required=True)
+
 class ContactHandler (webapp2.RequestHandler):
     def get(self):
         contact_template = jinja_env.get_template('contact.html')
