@@ -1,5 +1,8 @@
 body {
   background-color: #ADD8E6;
+  opacity: 0;
+  transition: opacity 3s;
+  -webkit-trasition: opacity 3s;
 }
 
 ul {
