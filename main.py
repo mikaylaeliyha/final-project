@@ -78,6 +78,7 @@ class ContactHandler(webapp2.RequestHandler):
         story.put()
         self.response.write(contact2_template.render(my_dict))
 
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/music', MusicHandler),
