@@ -31,7 +31,7 @@ class GifsHandler (webapp2.RequestHandler):
         params = {'api_key': 'F3eg1VxjOgwzWvn4J49lhRAFXBBh6Z0Z', #api key is from giphy.com
                 'q': search_term,
                 'rating': 'g',
-                'limit': 25}
+                'limit': 50}
         form_data = urllib.urlencode(params)
         api_url = 'http://api.giphy.com/v1/gifs/search?' + form_data
 
@@ -78,14 +78,7 @@ class ContactHandler(webapp2.RequestHandler):
         comments=my_dict["comments"])
         story.put()
         self.response.write(contact2_template.render(my_dict))
-        server = smtplib.SMTP('smtp.gmail.com', 587)
-        server.starttls()
-        server.login("1001189@student.salinasuhsd.org", "YOUR PASSWORD")
-
-        msg = "YOUR MESSAGE!"
-        server.sendmail("YOUR EMAIL ADDRESS", "THE EMAIL ADDRESS TO SEND TO", msg)
-        server.quit()
-
+    
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
