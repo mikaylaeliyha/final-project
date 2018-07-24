@@ -5,6 +5,7 @@ import json
 import urllib
 import urllib2
 from google.appengine.ext import ndb
+import smtplib
 
 jinja_env = jinja2.Environment(
     loader= jinja2.FileSystemLoader(
@@ -30,7 +31,7 @@ class GifsHandler (webapp2.RequestHandler):
         params = {'api_key': 'F3eg1VxjOgwzWvn4J49lhRAFXBBh6Z0Z', #api key is from giphy.com
                 'q': search_term,
                 'rating': 'g',
-                'limit': 25}
+                'limit': 50}
         form_data = urllib.urlencode(params)
         api_url = 'http://api.giphy.com/v1/gifs/search?' + form_data
 
@@ -77,6 +78,7 @@ class ContactHandler(webapp2.RequestHandler):
         comments=my_dict["comments"])
         story.put()
         self.response.write(contact2_template.render(my_dict))
+    
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
