@@ -55,9 +55,15 @@ class TipsHandler (webapp2.RequestHandler):
         tips_template = jinja_env.get_template('tips.html')
         self.response.write(tips_template.render())
 
+class ContactHandler (webapp2.RequestHandler):
+    def get(self):
+        contact_template = jinja_env.get_template('contact.html')
+        self.response.write(contact_template.render())
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/music', MusicHandler),
     ('/gifs', GifsHandler),
     ('/tips', TipsHandler),
+    ('/contact', ContactHandler),
 ], debug=True)
