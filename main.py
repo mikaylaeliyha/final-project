@@ -5,6 +5,7 @@ import json
 import urllib
 import urllib2
 from google.appengine.ext import ndb
+import smtplib
 
 jinja_env = jinja2.Environment(
     loader= jinja2.FileSystemLoader(
@@ -77,6 +78,13 @@ class ContactHandler(webapp2.RequestHandler):
         comments=my_dict["comments"])
         story.put()
         self.response.write(contact2_template.render(my_dict))
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login("1001189@student.salinasuhsd.org", "YOUR PASSWORD")
+
+        msg = "YOUR MESSAGE!"
+        server.sendmail("YOUR EMAIL ADDRESS", "THE EMAIL ADDRESS TO SEND TO", msg)
+        server.quit()
 
 
 app = webapp2.WSGIApplication([
