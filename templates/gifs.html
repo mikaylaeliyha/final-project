@@ -6,14 +6,16 @@
     <link rel="stylesheet" href="style/main.css">
   </head>
   <body onload="document.body.style.opacity='1'">
+  <div>
     <ul>
       <li><a class="active" href="/">Home</a></li>
-      <li><a href="/tips">Methods</a>
-      <li><a href="#saved">Saved</a>
-      <li><a href="/contact">Contact</a>
-      <li><a href="/music">Music</a>
-      <li><a href="/gifs">Gifs</a>
+      <li><a href="/tips">Methods</a></li>
+      <li><a href="#saved">Saved</a></li>
+      <li><a href="/contact">Contact</a></li>
+      <li><a href="/music">Music</a></li>
+      <li><a href="/gifs">Gifs</a></li>
     </ul>
+  </div>
     <center><h1>In Tune</h1></center>
     {% for url in gif_urls %}
     <center><img class=gifs src= "{{url}}"/></center>
