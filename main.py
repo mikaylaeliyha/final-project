@@ -22,8 +22,34 @@ class MusicHandler (webapp2.RequestHandler):
 
 class GifsHandler (webapp2.RequestHandler):
     def get(self):
-        gifs_template = jinja_env.get_template('gifs.html')
-        self.response.write(gifs_template.render())
+        search_term = self.request.get('search')
+        if search_term:
+            updateSearchCount(search_term)
+        else:
+            search_term = "calming"
+        params = {'api_key': 'F3eg1VxjOgwzWvn4J49lhRAFXBBh6Z0Z', #api key is from giphy.com
+                'q': search_term,
+                'rating': 'g',
+                'limit': 50}
+        form_data = urllib.urlencode(params)
+        api_url = 'http://api.giphy.com/v1/gifs/search?' + form_data
+
+        response = urllib2.urlopen(api_url)
+        content = json.loads(response.read())
+
+        gif_urls = []
+        for img in content['data']:
+            url = img['images']['original']['url']
+            gif_urls.append(url)
+
+        template = jinja_env.get_template('gifs.html')
+        variables = {'gif_urls': gif_urls,
+                    'q': search_term}
+        self.response.write(template.render(variables))
+
+    # gifs_template = jinja_env.get_template('gifs.html')
+    # self.response.write(gifs_template.render())
+
 class TipsHandler (webapp2.RequestHandler):
     def get(self):
         tips_template = jinja_env.get_template('tips.html')
