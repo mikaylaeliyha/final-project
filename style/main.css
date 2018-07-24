@@ -1,5 +1,8 @@
 body {
   background-color: #dcdfed;
+  opacity: 0;
+  transition: opacity 3s;
+  -webkit-trasition: opacity 3s;
 }
 
 ul {
@@ -80,5 +83,4 @@ p {
   width: 550px;
   margin-left: 25px;
   margin-right: 25px;
-
 }
