@@ -30,7 +30,7 @@ class GifsHandler (webapp2.RequestHandler):
         params = {'api_key': 'F3eg1VxjOgwzWvn4J49lhRAFXBBh6Z0Z', #api key is from giphy.com
                 'q': search_term,
                 'rating': 'g',
-                'limit': 50}
+                'limit': 25}
         form_data = urllib.urlencode(params)
         api_url = 'http://api.giphy.com/v1/gifs/search?' + form_data
 
