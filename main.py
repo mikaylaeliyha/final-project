@@ -5,10 +5,7 @@ import json
 import urllib
 import urllib2
 from google.appengine.ext import ndb
-
 from google.appengine.api import users
-
-import smtplib
 
 jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -81,6 +78,8 @@ class UserSearch(ndb.Model):
     lastname = ndb.StringProperty(required=True)
     country = ndb.StringProperty(required=True)
     comments = ndb.StringProperty(required=True)
+    email = ndb.StringProperty(required=True)
+    updated = ndb.DateTimeProperty(auto_now=True)
 
 class ContactHandler(webapp2.RequestHandler):
     def get(self):
