@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1> Recently Comments </h1>
+    {% for each_comment in recentcomments %}
+    <p> <b>Name:</b> {{each_comment.firstname}} {{each_comment.lastname}} <b>Email:</b>{{each_comment.email}} <b>Country:</b>{{each_comment.country}} <b>Comment:</b> {{each_comment.comments}} <p>
+    {% endfor %}
+  </body>
+</html>
