@@ -51,7 +51,8 @@ h1 {
   font-family: 'Montserrat', sans-serif;
   font-family: 'Raleway', sans-serif;
   font-family: 'Dancing Script', cursive;
-  font-size: 70px;
+  font-size: 100px;
+  color: 111;
 }
 
 h2 {
@@ -74,17 +75,38 @@ h2 {
     margin-top: 30px;
 }
 
+.container {
+  position: relative;
+  text-align: center;
+}
+
+.centered {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.top-middle {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 img {
-  height: 500px;
-  width: 700px;
+  /* height: 400px;
+  width: 600px; */
   padding-bottom: 10px;
-  padding-left: 15px;
+  /* padding-left: px; */
+  opacity: 0.5;
+  filter: alpha(opacity=50);
 }
 
 #about {
   background-color: #FFF;
   border: none;
-  padding: 50px 300px;
+  padding: 30px 300px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
