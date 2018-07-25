@@ -20,9 +20,12 @@
     <center>
       <img class="clouds" src="https://media3.giphy.com/media/qq5gwamAHVofm/200_d.gif" style="width:80%;">
     </center>
-    <div class="centered"><center><button class="button">Login</button></center></div>
-<div class="top-middle"><center><h1>In Tune</h1></center></div>
-</div>
+    {% if signin_page_url %}
+    <a href="{{signin_page_url}}" >sign in<a>
+      <!-- <button href="{{signin_page_url}}"class="button">sign in </button> -->
+      {% else %}
+      <a href="{{signout_page_url}}" >sign out<a>
+      {% endif %}
     <center>
       <div id="about">
         <h2>About</h2>

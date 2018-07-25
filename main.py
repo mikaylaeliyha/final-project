@@ -5,11 +5,31 @@ import json
 import urllib
 import urllib2
 from google.appengine.ext import ndb
+
+from google.appengine.api import users
+
 import smtplib
 
 jinja_env = jinja2.Environment(
-    loader= jinja2.FileSystemLoader(
-        os.path.dirname(__file__) + '/templates'))
+    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
+    extensions=['jinja2.ext.autoescape'],
+    autoescape=True)
+
+class SignInHandler(webapp2.RequestHandler):
+    def get(self):
+        me =  users.get_current_user()
+        print "hi"
+        print me
+        start_template = jinja_env.get_template("templates/main.html")
+        jinja_values = {}
+
+        if not me:
+            jinja_values["signin_page_url"] = users.create_login_url('/')
+        else:
+            jinja_values["signout_page_url"] = users.create_logout_url('/')
+        print jinja_values
+
+        self.response.write(start_template.render(jinja_values))
 
 class MainHandler (webapp2.RequestHandler):
     def get(self):
@@ -18,7 +38,7 @@ class MainHandler (webapp2.RequestHandler):
 
 class MusicHandler (webapp2.RequestHandler):
     def get(self):
-        music_template = jinja_env.get_template('music.html')
+        music_template = jinja_env.get_template('templates/music.html')
         self.response.write(music_template.render())
 
 class GifsHandler (webapp2.RequestHandler):
@@ -43,7 +63,7 @@ class GifsHandler (webapp2.RequestHandler):
             url = img['images']['original']['url']
             gif_urls.append(url)
 
-        template = jinja_env.get_template('gifs.html')
+        template = jinja_env.get_template('templates/gifs.html')
         variables = {'gif_urls': gif_urls,
                     'q': search_term}
         self.response.write(template.render(variables))
@@ -53,7 +73,7 @@ class GifsHandler (webapp2.RequestHandler):
 
 class TipsHandler (webapp2.RequestHandler):
     def get(self):
-        tips_template = jinja_env.get_template('tips.html')
+        tips_template = jinja_env.get_template('templates/tips.html')
         self.response.write(tips_template.render())
 
 class UserSearch(ndb.Model):
@@ -64,7 +84,7 @@ class UserSearch(ndb.Model):
 
 class ContactHandler(webapp2.RequestHandler):
     def get(self):
-        contact_template = jinja_env.get_template("contact.html")
+        contact_template = jinja_env.get_template('templates/contact.html')
         self.response.write(contact_template.render())
     def post(self):
         contact2_template = jinja_env.get_template("contact2.html")
@@ -78,10 +98,10 @@ class ContactHandler(webapp2.RequestHandler):
         comments=my_dict["comments"])
         story.put()
         self.response.write(contact2_template.render(my_dict))
-    
+
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler),
+    ('/', SignInHandler),
     ('/music', MusicHandler),
     ('/gifs', GifsHandler),
     ('/tips', TipsHandler),
