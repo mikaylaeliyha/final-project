@@ -5,8 +5,10 @@ import json
 import urllib
 import urllib2
 from google.appengine.ext import ndb
+
 from google.appengine.api import users
 
+import smtplib
 
 jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -80,10 +82,23 @@ class UserSearch(ndb.Model):
     country = ndb.StringProperty(required=True)
     comments = ndb.StringProperty(required=True)
 
-class ContactHandler (webapp2.RequestHandler):
+class ContactHandler(webapp2.RequestHandler):
     def get(self):
         contact_template = jinja_env.get_template('templates/contact.html')
         self.response.write(contact_template.render())
+    def post(self):
+        contact2_template = jinja_env.get_template("contact2.html")
+        my_dict = {
+            'firstname': self.request.get('firstname'),
+            'lastname': self.request.get('lastname'),
+            'country': self.request.get('country'),
+            'comments': self.request.get('comments'),
+        }
+        story = UserSearch(firstname=my_dict["firstname"],lastname=my_dict["lastname"], country=my_dict["country"],
+        comments=my_dict["comments"])
+        story.put()
+        self.response.write(contact2_template.render(my_dict))
+
 
 app = webapp2.WSGIApplication([
     ('/', SignInHandler),

@@ -5,18 +5,20 @@
     <title>In Tune - Home</title>
     <link rel="stylesheet" href="style/main.css">
   </head>
-  <body onload="document.body.style.opacity='1'">
+  <body class="fade-in">
+  <div>
     <ul>
       <li><a class="active" href="/">Home</a></li>
-      <li><a href="/tips">Methods</a>
-      <li><a href="#saved">Saved</a>
-      <li><a href="/contact">Contact</a>
-      <li><a href="/music">Music</a>
-      <li><a href="/gifs">Gifs</a>
+      <li><a href="/tips">Methods</a></li>
+      <li><a href="#saved">Saved</a></li>
+      <li><a href="/contact">Contact</a></li>
+      <li><a href="/music">Music</a></li>
+      <li><a href="/gifs">Gifs</a></li>
     </ul>
-    <center><h1>In Tune</h1></center>
+  </div>
+  <div class="container">
     <center>
-      <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736881__340.jpg">
+      <img src="https://media3.giphy.com/media/qq5gwamAHVofm/200_d.gif" style="width:80%;">
     </center>
     {% if signin_page_url %}
     <a href="{{signin_page_url}}" >sign in<a>
