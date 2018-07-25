@@ -84,26 +84,36 @@ class UserSearch(ndb.Model):
 
 class ContactHandler(webapp2.RequestHandler):
     def get(self):
-        contact_template = jinja_env.get_template('templates/contact.html')
+        contact_template = jinja_env.get_template("contact.html")
         self.response.write(contact_template.render())
     def post(self):
-        contact2_template = jinja_env.get_template("contact2.html")
         my_dict = {
             'firstname': self.request.get('firstname'),
             'lastname': self.request.get('lastname'),
+            'email': self.request.get('email'),
             'country': self.request.get('country'),
             'comments': self.request.get('comments'),
+            'updated_at': self.request.get('updated_at')
         }
-        story = UserSearch(firstname=my_dict["firstname"],lastname=my_dict["lastname"], country=my_dict["country"],
-        comments=my_dict["comments"])
+        story = UserSearch(firstname=my_dict["firstname"],lastname=my_dict["lastname"], email=my_dict["email"],
+        country=my_dict["country"], comments=my_dict["comments"])
+        contact2_template = jinja_env.get_template("contact2.html")
         story.put()
         self.response.write(contact2_template.render(my_dict))
 
+class Contact3Handler(webapp2.RequestHandler):
+    def get(self):
+        contact3_template = jinja_env.get_template('contact3.html')
+        recentcomments = UserSearch.query().order(-UserSearch.updated_at).fetch(limit=10)
+        self.response.write(contact3_template.render({'recentcomments': recentcomments}))
+
+
 
 app = webapp2.WSGIApplication([
-    ('/', SignInHandler),
+    ('/', MainHandler),
     ('/music', MusicHandler),
     ('/gifs', GifsHandler),
     ('/tips', TipsHandler),
     ('/contact', ContactHandler),
+    ('/contact3', Contact3Handler),
 ], debug=True)
