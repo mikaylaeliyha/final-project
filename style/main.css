@@ -94,7 +94,7 @@ h2 {
   transform: translate(-50%, -50%);
 }
 
-img {
+.clouds {
   /* height: 400px;
   width: 600px; */
   padding-bottom: 10px;
@@ -148,15 +148,19 @@ input[type=submit]:hover {
     background-color: #111;
 }
 
-.container {
+.contain {
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
 }
 
-input {
-  margin-left: 25px;
+.stuff {
+  /* margin-left: 5px; */
   margin-right: 25px;
+}
+
+.other {
+  margin-left: 25px;
 }
 
 h3 {
