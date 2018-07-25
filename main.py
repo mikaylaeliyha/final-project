@@ -5,10 +5,49 @@ import json
 import urllib
 import urllib2
 from google.appengine.ext import ndb
+from google.appengine.api import users
 
-jinja_env = jinja2.Environment(
-    loader= jinja2.FileSystemLoader(
-        os.path.dirname(__file__) + '/templates'))
+
+jinja_current_dir = jinja2.Environment(
+    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
+    extensions=['jinja2.ext.autoescape'],
+    autoescape=True)
+# marie's login
+
+class SignInHandler(webapp2.RequestHandler):
+    def get(self):
+        me =  users.get_current_user()
+        print "hi"
+        print me
+        start_template = jinja_current_dir.get_template("templates/main.html")
+        jinja_values = {}
+
+        if not me:
+            jinja_values["signin_page_url"] = users.create_login_url('/')
+        else:
+            jinja_values["signout_page_url"] = users.create_logout_url('/')
+        print jinja_values
+        # else:
+        #         'signin_page_url': users.create_logout_url('/'),
+        #     }
+        self.response.write(start_template.render(jinja_values))
+        # else:
+        #     my_key = ndb.Key('Visitor', me.user_id())
+        #     my_visitor = my_key.get()
+        #     if not my_visitor:
+        #         my_visitor = Visitor(key = my_key, name = me.nickname(), email = me.email(),id = me.user_id(),
+        #         page_view_count = 0)
+        #     my_visitor.page_view_count += 1
+        #     my_visitor.put()
+        #     withuser_template = jinja_current_dir.get_template("templates/login.html")
+        #     jinja_values = {
+        #         'name': me.nickname(),
+        #         'email_addr': me.email(),
+        #         'user_id': me.user_id(),
+        #         'signout_page_url': users.create_logout_url('/'),
+        #         'number_of_views': my_visitor.page_view_count
+        #     }
+        #     self.response.write(withuser_template.render(jinja_values))
 
 class MainHandler (webapp2.RequestHandler):
     def get(self):
@@ -66,8 +105,10 @@ class ContactHandler (webapp2.RequestHandler):
         contact_template = jinja_env.get_template('contact.html')
         self.response.write(contact_template.render())
 
+# also added login handler to this
 app = webapp2.WSGIApplication([
-    ('/', MainHandler),
+    ('/', SignInHandler),
+    ('/login', SignInHandler),
     ('/music', MusicHandler),
     ('/gifs', GifsHandler),
     ('/tips', TipsHandler),

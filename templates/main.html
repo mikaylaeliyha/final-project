@@ -18,7 +18,12 @@
     <center>
       <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736881__340.jpg">
     </center>
-    <center><button class="button">Login</button></center>
+    {% if signin_page_url %}
+    <a href="{{signin_page_url}}" >sign in<a>
+      <!-- <button href="{{signin_page_url}}"class="button">sign in </button> -->
+      {% else %}
+      <a href="{{signout_page_url}}" >sign out<a>
+      {% endif %}
     <center>
       <div id="about">
         <h2>About</h2>
