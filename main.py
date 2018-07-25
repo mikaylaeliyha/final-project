@@ -110,7 +110,7 @@ class Contact3Handler(webapp2.RequestHandler):
 
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler),
+    ('/', SignInHandler),
     ('/music', MusicHandler),
     ('/gifs', GifsHandler),
     ('/tips', TipsHandler),
