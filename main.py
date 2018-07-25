@@ -33,7 +33,7 @@ class SignInHandler(webapp2.RequestHandler):
 
 class MainHandler (webapp2.RequestHandler):
     def get(self):
-        main_template = jinja_env.get_template('main.html')
+        main_template = jinja_env.get_template('templates/main.html')
         self.response.write(main_template.render())
 
 class MusicHandler (webapp2.RequestHandler):
@@ -84,7 +84,7 @@ class UserSearch(ndb.Model):
 
 class ContactHandler(webapp2.RequestHandler):
     def get(self):
-        contact_template = jinja_env.get_template("contact.html")
+        contact_template = jinja_env.get_template("templates/contact.html")
         self.response.write(contact_template.render())
     def post(self):
         my_dict = {
