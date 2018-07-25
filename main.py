@@ -6,6 +6,7 @@ import urllib
 import urllib2
 from google.appengine.ext import ndb
 from google.appengine.api import users
+from models import Visitor
 
 jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -16,15 +17,20 @@ class SignInHandler(webapp2.RequestHandler):
     def get(self):
         me =  users.get_current_user()
         print "hi"
-        print me
-        start_template = jinja_env.get_template("templates/main.html")
         jinja_values = {}
-
+        start_template = jinja_env.get_template("templates/main.html")
         if not me:
-            jinja_values["signin_page_url"] = users.create_login_url('/')
+            jinja_values = {
+                'signin_page_url': users.create_login_url('/')
+            }
+            self.response.write(start_template.render(jinja_values))
         else:
+            my_key = ndb.Key('Visitor', me.user_id())
+            my_visitor = my_key.get()
+            if not my_visitor:
+                my_visitor = Visitor(key = my_key, name = me.nickname(), email = me.email(),id = me.user_id())
             jinja_values["signout_page_url"] = users.create_logout_url('/')
-        print jinja_values
+            my_visitor.put()
 
         self.response.write(start_template.render(jinja_values))
 
