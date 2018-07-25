@@ -30,10 +30,13 @@ div ul {
     background-color: #333;
 }
 
-div li {
-    float: left;
-}
 
+.active {
+  font-family: 'Dancing Script', cursive;
+  font-size: 20px;
+  color: white;
+  float:right;
+}
 div li a {
     font-family: 'Quicksand', sans-serif;
     display: block;
@@ -41,6 +44,7 @@ div li a {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    float: left;
 }
 
 div li a:hover {
