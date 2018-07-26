@@ -172,6 +172,10 @@ class Contact3Handler(webapp2.RequestHandler):
         recentcomments = UserSearch.query().order(-UserSearch.updated_at).fetch(limit=10)
         self.response.write(contact3_template.render({'recentcomments': recentcomments}))
 
+class DiscussionHandler (webapp2.RequestHandler):
+    def get(self):
+        discussion_template = jinja_env.get_template('templates/discussion.html')
+        self.response.write(discussion_template.render())
 
 
 app = webapp2.WSGIApplication([
@@ -182,4 +186,5 @@ app = webapp2.WSGIApplication([
     ('/contact', ContactHandler),
     ('/contact3', Contact3Handler),
     ('/saved', SavedPage),
+    ('/discussion', DiscussionHandler),
 ], debug=True)
