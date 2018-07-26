@@ -21,15 +21,38 @@
   <br><br>
 
   <center><h2>Calming Gifs</h2></center>
-  <center><div class="dropdown">
-    <button class="dropbtn">Dropdown</button>
+
+<center>
+<form method="get" class="menu">
+<label for "menu" class="font">More Gifs!</label>
+<br><br>
+<select id="menu" name="menu">
+  <option value="soothing">Soothing</option>
+  <option value="Satisfying">Satisfying</option>
+  <option value="Relax">Relax</option>
+</select>
+<br>
+<input type="submit" value="Submit">
+</form>
+</center>
+
+  <!-- <center><div class="dropdown">
+    <button class="dropbtn">More Gifs</button>
+
     <div class="dropdown-content">
+
       <a href="#">Satisfying</a>
+
       <a href="#">Gif page 2</a>
+
       <a href="#">Gif page 3</a>
+
     </div>
-  </div></center>
+
+  </div></center> -->
+
   <br><br>
+
     {% for url in gif_urls %}
     <center><img class=gifs src= "{{url}}"/></center>
     {% endfor %}
