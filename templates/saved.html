@@ -20,20 +20,14 @@
     </ul>
 </div>
 
-{% if searches|length == 0 %}
+{% if not data %}
 <p><b>Nothing is saved</b></p>
 {% else %}
 <ul>
 
-
-  {% for each_method in recentsaves %}
-  <p> <b>Saved Tips:</b> {{each_method.click1}} {{each_method.click2}} {{each_method.click3}} {{each_method.click4}} {{each_method.click5}} {{each_method.click6}} {{each_method.click7}}
-    {{each_method.click8}} {{each_method.click9}} {{each_method.click10}} {{each_method.click11}} {{each_method.click12}} {{each_method.click13}} {{each_method.click14}} {{each_method.click15}}
-    {{each_method.click16}} {{each_method.click17}} {{each_method.click18}}
+  <p> <b>Saved Tips:</b> {{data}} <p>
 </ul>
-{% endfor %}
 {% endif %}
-
 
   </body>
 </html>
