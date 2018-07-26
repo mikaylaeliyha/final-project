@@ -50,8 +50,7 @@ class GifsHandler (webapp2.RequestHandler):
         if search_term:
             updateSearchCount(search_term)
         else:
-            search_term = "soothing"
-
+            search_term = "satisfying"
         params = {'api_key': 'F3eg1VxjOgwzWvn4J49lhRAFXBBh6Z0Z', #api key is from giphy.com
                 'q': search_term,
                 'rating': 'g',
@@ -78,51 +77,38 @@ class GifsHandler (webapp2.RequestHandler):
 class TipsHandler (webapp2.RequestHandler):
     def get(self):
         tips_template = jinja_env.get_template('templates/tips.html')
-        self.response.write(tips_template.render())
+        query = SavedMethods.query(SavedMethods.id==users.get_current_user().user_id())
+        self.response.write(tips_template.render({'data': query.get()}))
+
     def post(self):
-        my_dict = {
-            "id": users.get_current_user().user_id(),
-            'click1': self.request.get('click1'),
-            'click2': self.request.get('click2'),
-            'click3': self.request.get('click3'),
-            'click4': self.request.get('click4'),
-            'click5': self.request.get('click5'),
-            'click6': self.request.get('click6'),
-            'click7': self.request.get('click7'),
-            'click8': self.request.get('click8'),
-            'click9': self.request.get('click9'),
-            'click10': self.request.get('click10'),
-            'click11': self.request.get('click11'),
-            'click12': self.request.get('click12'),
-            'click13': self.request.get('click13'),
-            'click14': self.request.get('click14'),
-            'click15': self.request.get('click15'),
-            'click16': self.request.get('click16'),
-            'click17': self.request.get('click17'),
-            'click18': self.request.get('click18')
-        }
-        story = SavedMethods(id=my_dict["id"],
-                            click1=my_dict["click1"],
-                            click2=my_dict["click2"],
-                            click3=my_dict["click3"],
-                            click4=my_dict["click4"],
-                            click5=my_dict["click5"],
-                            click6=my_dict["click6"],
-                            click7=my_dict["click7"],
-                            click8=my_dict["click8"],
-                            click9=my_dict["click9"],
-                            click10=my_dict["click10"],
-                            click11=my_dict["click11"],
-                            click12=my_dict["click12"],
-                            click13=my_dict["click13"],
-                            click14=my_dict["click14"],
-                            click15=my_dict["click15"],
-                            click16=my_dict["click16"],
-                            click17=my_dict["click17"],
-                            click18=my_dict["click18"])
+        query = SavedMethods.query(SavedMethods.id==users.get_current_user().user_id())
+        story = query.get()
+        if not story:
+            story = SavedMethods()
+            story.id = users.get_current_user().user_id()
+
+        story.click1 = self.request.get('click1')
+        story.click2 = self.request.get('click2')
+        story.click3 = self.request.get('click3')
+        story.click4 = self.request.get('click4')
+        story.click5 = self.request.get('click5')
+        story.click6 = self.request.get('click6')
+        story.click7 = self.request.get('click7')
+        story.click8 = self.request.get('click8')
+        story.click9 = self.request.get('click9')
+        story.click10 = self.request.get('click10')
+        story.click11 = self.request.get('click11')
+        story.click12 = self.request.get('click12')
+        story.click13 = self.request.get('click13')
+        story.click14 = self.request.get('click14')
+        story.click15 = self.request.get('click15')
+        story.click16 = self.request.get('click16')
+        story.click17 = self.request.get('click17')
+        story.click18 = self.request.get('click18')
+
         tips2_template = jinja_env.get_template("templates/tips2.html")
         story.put()
-        self.response.write(tips2_template.render(my_dict))
+        self.response.write(tips2_template.render())
 
 class SavedMethods(ndb.Model):
     id =  ndb.StringProperty(required=True)
@@ -159,7 +145,6 @@ class UserSearch(ndb.Model):
     comments = ndb.StringProperty(required=True)
     email = ndb.StringProperty(required=True)
     updated = ndb.DateTimeProperty(auto_now=True)
-    count = ndb.IntegerProperty(required=True)
 
 class ContactHandler(webapp2.RequestHandler):
     def get(self):
@@ -176,14 +161,14 @@ class ContactHandler(webapp2.RequestHandler):
         }
         story = UserSearch(firstname=my_dict["firstname"],lastname=my_dict["lastname"], email=my_dict["email"],
         country=my_dict["country"], comments=my_dict["comments"])
-        contact2_template = jinja_env.get_template("contact2.html")
+        contact2_template = jinja_env.get_template("templates/contact2.html")
         story.put()
         self.response.write(contact2_template.render(my_dict))
 
 
 class Contact3Handler(webapp2.RequestHandler):
     def get(self):
-        contact3_template = jinja_env.get_template('contact3.html')
+        contact3_template = jinja_env.get_template('templates/contact3.html')
         recentcomments = UserSearch.query().order(-UserSearch.updated_at).fetch(limit=10)
         self.response.write(contact3_template.render({'recentcomments': recentcomments}))
 
