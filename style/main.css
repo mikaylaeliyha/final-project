@@ -1,8 +1,5 @@
 body {
   background-color: #e5e6e8;
-  /* opacity: 0;
-  transition: opacity 3s;
-  -webkit-transition: opacity 3s; */
 }
 
 .fade-in {
@@ -202,7 +199,6 @@ iframe {
 
 footer {
   font-family: 'Quicksand', sans-serif;
-  margin-left: 25px;
   padding-top: 20px;
 }
 
@@ -245,4 +241,19 @@ footer {
 
 .dropdown:hover .dropbtn {
   background-color: #111;
+}
+
+.yes {
+  background-color: white;
+  padding: 25px;
+  margin-left: 300px;
+  margin-right: 300px;
+}
+
+.menu {
+  width: 15%;
+}
+
+.font {
+  font-family: 'Quicksand', sans-serif;
 }
