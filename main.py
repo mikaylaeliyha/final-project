@@ -23,7 +23,7 @@ class SignInHandler(webapp2.RequestHandler):
             jinja_values = {
                 'signin_page_url': users.create_login_url('/')
             }
-            # self.response.write(start_template.render(jinja_values))
+            self.response.write(start_template.render(jinja_values))
         else:
             my_key = ndb.Key('Visitor', me.user_id())
             my_visitor = my_key.get()
@@ -78,51 +78,9 @@ class TipsHandler (webapp2.RequestHandler):
     def get(self):
         tips_template = jinja_env.get_template('templates/tips.html')
         self.response.write(tips_template.render())
-
-class UserSearch(ndb.Model):
-    firstname = ndb.StringProperty(required=True)
-    lastname = ndb.StringProperty(required=True)
-    country = ndb.StringProperty(required=True)
-    comments = ndb.StringProperty(required=True)
-    email = ndb.StringProperty(required=True)
-    updated = ndb.DateTimeProperty(auto_now=True)
-    # count = ndb.IntegerProperty(required=True)
-
-class SavedMethods(ndb.Model):
-    click1 = ndb.StringProperty(required=False)
-    click2 = ndb.StringProperty(required=False)
-    click3 = ndb.StringProperty(required=False)
-    click4 = ndb.StringProperty(required=False)
-    click5 = ndb.StringProperty(required=False)
-    click6 = ndb.StringProperty(required=False)
-    click7 = ndb.StringProperty(required=False)
-    click8 = ndb.StringProperty(required=False)
-    click9 = ndb.StringProperty(required=False)
-    click10 = ndb.StringProperty(required=False)
-    click11 = ndb.StringProperty(required=False)
-    click12 = ndb.StringProperty(required=False)
-    click13 = ndb.StringProperty(required=False)
-    click14 = ndb.StringProperty(required=False)
-    click15 = ndb.StringProperty(required=False)
-    click16 = ndb.StringProperty(required=False)
-    click17 = ndb.StringProperty(required=False)
-    click18 = ndb.StringProperty(required=False)
-
-
-def getSavedTips():
-    return SavedMethods.query().fetch()
-
-
-class SavedPage(webapp2.RequestHandler):
-    def get(self):
-        searches = getSavedTips()
-        template = jinja_env.get_template('templates/saved.html')
-        variables = {'recentsaves': searches}
-        print(searches)
-
-        self.response.write(template.render(variables))
     def post(self):
         my_dict = {
+            "id": users.get_current_user().user_id(),
             'click1': self.request.get('click1'),
             'click2': self.request.get('click2'),
             'click3': self.request.get('click3'),
@@ -142,7 +100,8 @@ class SavedPage(webapp2.RequestHandler):
             'click17': self.request.get('click17'),
             'click18': self.request.get('click18')
         }
-        story = SavedMethods(click1=my_dict["click1"],
+        story = SavedMethods(id=my_dict["id"],
+                            click1=my_dict["click1"],
                             click2=my_dict["click2"],
                             click3=my_dict["click3"],
                             click4=my_dict["click4"],
@@ -160,14 +119,46 @@ class SavedPage(webapp2.RequestHandler):
                             click16=my_dict["click16"],
                             click17=my_dict["click17"],
                             click18=my_dict["click18"])
-        tips_template = jinja_env.get_template("templates/tips.html")
+        tips2_template = jinja_env.get_template("templates/tips2.html")
         story.put()
-        self.response.write(tips_template.render(my_dict))
+        self.response.write(tips2_template.render(my_dict))
+
+class SavedMethods(ndb.Model):
+    id =  ndb.StringProperty(required=True)
+    click1 = ndb.StringProperty(required=False)
+    click2 = ndb.StringProperty(required=False)
+    click3 = ndb.StringProperty(required=False)
+    click4 = ndb.StringProperty(required=False)
+    click5 = ndb.StringProperty(required=False)
+    click6 = ndb.StringProperty(required=False)
+    click7 = ndb.StringProperty(required=False)
+    click8 = ndb.StringProperty(required=False)
+    click9 = ndb.StringProperty(required=False)
+    click10 = ndb.StringProperty(required=False)
+    click11 = ndb.StringProperty(required=False)
+    click12 = ndb.StringProperty(required=False)
+    click13 = ndb.StringProperty(required=False)
+    click14 = ndb.StringProperty(required=False)
+    click15 = ndb.StringProperty(required=False)
+    click16 = ndb.StringProperty(required=False)
+    click17 = ndb.StringProperty(required=False)
+    click18 = ndb.StringProperty(required=False)
+
+class SavedPage(webapp2.RequestHandler):
+    def get(self):
         saved_template = jinja_env.get_template('templates/saved.html')
-        recentsaves = SavedMethods.query().fetch()
+        query = SavedMethods.query(SavedMethods.id==users.get_current_user().user_id())
+        self.response.write(saved_template.render({'data': query.get()}))
 
 
-
+class UserSearch(ndb.Model):
+    firstname = ndb.StringProperty(required=True)
+    lastname = ndb.StringProperty(required=True)
+    country = ndb.StringProperty(required=True)
+    comments = ndb.StringProperty(required=True)
+    email = ndb.StringProperty(required=True)
+    updated = ndb.DateTimeProperty(auto_now=True)
+    count = ndb.IntegerProperty(required=True)
 
 class ContactHandler(webapp2.RequestHandler):
     def get(self):
@@ -184,7 +175,7 @@ class ContactHandler(webapp2.RequestHandler):
         }
         story = UserSearch(firstname=my_dict["firstname"],lastname=my_dict["lastname"], email=my_dict["email"],
         country=my_dict["country"], comments=my_dict["comments"])
-        contact2_template = jinja_env.get_template("templates/contact2.html")
+        contact2_template = jinja_env.get_template("contact2.html")
         story.put()
         self.response.write(contact2_template.render(my_dict))
 
