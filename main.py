@@ -181,7 +181,7 @@ class DiscussionHandler (webapp2.RequestHandler):
 class ResourceHandler (webapp2.RequestHandler):
     def get(self):
         resources_template = jinja_env.get_template('templates/resources.html')
-        self.response.write(resource_template.render())
+        self.response.write(resources_template.render())
 
 app = webapp2.WSGIApplication([
     ('/', SignInHandler),
