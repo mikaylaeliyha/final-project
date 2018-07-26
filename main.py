@@ -23,7 +23,7 @@ class SignInHandler(webapp2.RequestHandler):
             jinja_values = {
                 'signin_page_url': users.create_login_url('/')
             }
-            self.response.write(start_template.render(jinja_values))
+            # self.response.write(start_template.render(jinja_values))
         else:
             my_key = ndb.Key('Visitor', me.user_id())
             my_visitor = my_key.get()
@@ -86,7 +86,7 @@ class UserSearch(ndb.Model):
     comments = ndb.StringProperty(required=True)
     email = ndb.StringProperty(required=True)
     updated = ndb.DateTimeProperty(auto_now=True)
-    count = ndb.IntegerProperty(required=True)
+    # count = ndb.IntegerProperty(required=True)
 
 class SavedMethods(ndb.Model):
     click1 = ndb.StringProperty(required=False)
@@ -184,7 +184,7 @@ class ContactHandler(webapp2.RequestHandler):
         }
         story = UserSearch(firstname=my_dict["firstname"],lastname=my_dict["lastname"], email=my_dict["email"],
         country=my_dict["country"], comments=my_dict["comments"])
-        contact2_template = jinja_env.get_template("contact2.html")
+        contact2_template = jinja_env.get_template("templates/contact2.html")
         story.put()
         self.response.write(contact2_template.render(my_dict))
 
