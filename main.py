@@ -23,7 +23,7 @@ class SignInHandler(webapp2.RequestHandler):
             jinja_values = {
                 'signin_page_url': users.create_login_url('/')
             }
-            self.response.write(start_template.render(jinja_values))
+            # self.response.write(start_template.render(jinja_values))
         else:
             my_key = ndb.Key('Visitor', me.user_id())
             my_visitor = my_key.get()
