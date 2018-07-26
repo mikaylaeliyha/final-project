@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="style/main.css">
   </head>
   <body class="fade-in">
-
 <div>
     <ul>
       <li><a class="active" href="/">In Tune</a></li>
@@ -18,10 +17,28 @@
 			<li><a href="/discussion">Discussion</a></li>
 			<li><a href="/resources">Resources</a></li>
     </ul>
-  </div>
+</div>
     <br>
+{% if logged_in %}
 		<center><h2>Discussion Board</h2></center>
-	<center><a class="stuff" href="http://pub49.bravenet.com/forum/4192309487/">View the Discussion Board</a><br></center>
-<footer><center><p>Team Name: Invalid Syntax</p></center></footer>
+<center class="yes">
+	<h3>One of our recommended methods includes talking it out! This page allows our users to communicate with other users, recommend methods, and more! (Make sure to keep it clean please!)</h3>
+<br><br>
+	<a href="/discussion">Refresh Chat </a>
+	<br><br>
+		<form method = "POST">
+	    <input name="comment" placeholder="Leave a message..."/><br/>
+			<br>
+	      <input type="submit" value="Submit">
+	      <br><br>
+	  {% for i in mostRecent %}
+	    <p><h3>Message: {{i.comment}}</h3><br> Time posted: {{i.created}} user: {{i.email}}</p><br><br>
+	  {% endfor %}
+</center>
+
+{% else %}
+<p> Please sign in to access the Discussion Board. </p>
+{% endif %}
+		<footer><center><p>Team Name: Invalid Syntax</p></center></footer>
 	</body>
 </html>

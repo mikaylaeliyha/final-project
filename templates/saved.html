@@ -21,6 +21,7 @@
       <li><a href="/resources">Resources</a></li>
     </ul>
 </div>
+{% if logged_in %}
 <br><br>
 <center><h2>Saved Methods</h2></center>
 <div class="method">
@@ -42,7 +43,9 @@
 
 </div>
 {% endif %}
-
+{% else %}
+<p> Please log in to view the Saved Page.</p>
+{% endif %}
 <footer><center><p>Team Name: Invalid Syntax</p></center></footer>
   </body>
 </html>

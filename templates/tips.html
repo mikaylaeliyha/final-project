@@ -22,7 +22,7 @@
       <li><a href="/resources">Resources</a></li>
     </ul>
 </div>
-
+{% if logged_in %}
 <br>
 <center><h2>Methods</h2></center>
 <div class="method">
@@ -121,6 +121,9 @@ Gratitude journals cancel out negative thoughts and worries.
 
 <footer>Source: <a href="https://www.webmd.com/balance/guide/blissing-out-10-relaxation-techniques-reduce-stress-spot#2">webmd</a></footer>
 </div>
+{% else %}
+<p> Please log in to view the Tips Page </p>
+{% endif %}
   <footer><center><p>Team Name: Invalid Syntax</p></center></footer>
 
 </body>
