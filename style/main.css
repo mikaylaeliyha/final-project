@@ -200,6 +200,12 @@ iframe {
   border-width: 25px;
 }
 
+footer {
+  font-family: 'Quicksand', sans-serif;
+  margin-left: 25px;
+  padding-top: 20px;
+}
+
 .dropbtn {
     background-color: #333;
     color: white;
@@ -216,7 +222,7 @@ iframe {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
+    background-color: #FFFFFF;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -239,10 +245,4 @@ iframe {
 
 .dropdown:hover .dropbtn {
   background-color: #111;
-}
-
-footer {
-  font-family: 'Quicksand', sans-serif;
-  margin-left: 25px;
-  padding-top: 20px;
 }

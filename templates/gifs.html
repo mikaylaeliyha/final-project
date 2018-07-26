@@ -18,7 +18,17 @@
     </ul>
   </div>
   <br><br>
+
   <center><h2>Calming Gifs</h2></center>
+  <center><div class="dropdown">
+    <button class="dropbtn">Dropdown</button>
+    <div class="dropdown-content">
+      <a href="#">Satisfying</a>
+      <a href="#">Gif page 2</a>
+      <a href="#">Gif page 3</a>
+    </div>
+  </div></center>
+  <br><br>
     {% for url in gif_urls %}
     <center><img class=gifs src= "{{url}}"/></center>
     {% endfor %}
