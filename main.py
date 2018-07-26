@@ -23,7 +23,7 @@ class SignInHandler(webapp2.RequestHandler):
             jinja_values = {
                 'signin_page_url': users.create_login_url('/')
             }
-            # self.response.write(start_template.render(jinja_values))
+            #self.response.write(start_template.render(jinja_values))
         else:
             my_key = ndb.Key('Visitor', me.user_id())
             my_visitor = my_key.get()
@@ -76,9 +76,14 @@ class GifsHandler (webapp2.RequestHandler):
 
 class TipsHandler (webapp2.RequestHandler):
     def get(self):
+        me =  users.get_current_user()
         tips_template = jinja_env.get_template('templates/tips.html')
-        query = SavedMethods.query(SavedMethods.id==users.get_current_user().user_id())
-        self.response.write(tips_template.render({'data': query.get()}))
+        if me:
+            query = SavedMethods.query(SavedMethods.id==users.get_current_user().user_id())
+            self.response.write(tips_template.render({'data': query.get(),"logged_in": me}))
+        else:
+            self.response.write(tips_template.render({"logged_in": me}))
+
 
     def post(self):
         query = SavedMethods.query(SavedMethods.id==users.get_current_user().user_id())
@@ -133,10 +138,13 @@ class SavedMethods(ndb.Model):
 
 class SavedPage(webapp2.RequestHandler):
     def get(self):
+        me =  users.get_current_user()
         saved_template = jinja_env.get_template('templates/saved.html')
-        query = SavedMethods.query(SavedMethods.id==users.get_current_user().user_id())
-        self.response.write(saved_template.render({'data': query.get()}))
-
+        if me:
+            query = SavedMethods.query(SavedMethods.id==users.get_current_user().user_id())
+            self.response.write(saved_template.render({'data': query.get(), "logged_in": me}))
+        else:
+            self.response.write(saved_template.render({"logged_in": me}))
 
 class UserSearch(ndb.Model):
     firstname = ndb.StringProperty(required=True)
@@ -188,15 +196,17 @@ class comments(ndb.Model):
     email = ndb.StringProperty(required = True)
     created = ndb.DateTimeProperty(auto_now_add=True)
 
-
-
 class AddComments(webapp2.RequestHandler):
     def get(self):
-        info_template = jinja_env.get_template('templates/addcomments.html')
+        me =  users.get_current_user()
+        info_template = jinja_env.get_template('templates/discussion.html')
         mostRecent = comments.query().order(-comments.created).fetch(limit=25)
-        self.response.write(info_template.render({'mostRecent': mostRecent}))
+        self.response.write(info_template.render({'mostRecent': mostRecent,
+        'logged_in': me}))
+
     def post(self):
-        info_details = jinja_env.get_template('templates/addcomments.html')
+        info_details = jinja_env.get_template('templates/discussion.html')
+        me =  users.get_current_user()
     #    my_query = comment.query()
         my_dict = {
             'name': users.get_current_user().email(),
@@ -209,7 +219,7 @@ class AddComments(webapp2.RequestHandler):
          # fieldObject = totalComment(comment = comment)
          # totalComment.put()
         mostRecent = comments.query().order(-comments.created).fetch(limit=25)
-        self.response.write(info_details.render({'mostRecent': mostRecent}))
+        self.response.write(info_details.render({'mostRecent': mostRecent, 'logged_in': me}))
 
 
 app = webapp2.WSGIApplication([
@@ -222,5 +232,5 @@ app = webapp2.WSGIApplication([
     ('/saved', SavedPage),
     ('/discussion', AddComments),
     ('/resources', ResourceHandler),
-    
+
 ], debug=True)
