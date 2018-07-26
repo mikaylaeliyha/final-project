@@ -178,6 +178,11 @@ class DiscussionHandler (webapp2.RequestHandler):
         self.response.write(discussion_template.render())
 
 
+class ResourceHandler (webapp2.RequestHandler):
+    def get(self):
+        resources_template = jinja_env.get_template('templates/resources.html')
+        self.response.write(resource_template.render())
+
 app = webapp2.WSGIApplication([
     ('/', SignInHandler),
     ('/music', MusicHandler),
@@ -187,4 +192,5 @@ app = webapp2.WSGIApplication([
     ('/contact3', Contact3Handler),
     ('/saved', SavedPage),
     ('/discussion', DiscussionHandler),
+    ('/resources', ResourceHandler),
 ], debug=True)
