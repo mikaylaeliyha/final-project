@@ -46,10 +46,10 @@ class MusicHandler (webapp2.RequestHandler):
 
 class GifsHandler (webapp2.RequestHandler):
     def get(self):
-        search_term = self.request.get('search')
-        if search_term:
-            updateSearchCount(search_term)
-        else:
+        search_term = self.request.get('menu')
+        if not search_term:
+            # updateSearchCount(search_term)
+        # else:
             search_term = "soothing"
         params = {'api_key': 'F3eg1VxjOgwzWvn4J49lhRAFXBBh6Z0Z', #api key is from giphy.com
                 'q': search_term,
@@ -182,6 +182,9 @@ class ResourceHandler (webapp2.RequestHandler):
     def get(self):
         resources_template = jinja_env.get_template('templates/resources.html')
         self.response.write(resources_template.render())
+
+
+
 
 app = webapp2.WSGIApplication([
     ('/', SignInHandler),
