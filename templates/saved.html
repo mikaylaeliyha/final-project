@@ -20,24 +20,27 @@
       <li><a href="/discussion">Discussion</a></li>
     </ul>
 </div>
-
+<br><br>
+<div class="method">
 {% if not data %}
 <p><b>Nothing is saved</b></p>
 {% else %}
-<ul>
-  <p> <b>Meditation:</b> {{data.click1}} {{data.click2}} </p>
-  <p> <b>Breathe Deeply:</b> {{data.click3}} {{data.click4}} </p>
+
+  <p> <b>Meditation:</b> {{data.click1}} <br> {{data.click2}} </p>
+  <p> <b>Breathe Deeply:</b> {{data.click3}} <br> {{data.click4}} </p>
   <p> <b>Be Present:</b> {{data.click5}} </p>
   <p> <b>Reach Out:</b> {{data.click6}} </p>
   <p> <b>Tune In To Your Body:</b> {{data.click7}} </p>
   <p> <b>Decompress:</b> {{data.click8}} </p>
-  <p> <b>Laugh Out Loud:</b> {{data.click9}} {{data.click10}} </p>
-  <p> <b>Listen To Music:</b> {{data.click11}} {{data.click12}} {{data.click13}} </p>
-  <p> <b>Get Moving:</b> {{data.click14}} {{data.click15}} </p>
-  <p> <b>Be Grateful:</b> {{data.click16}} {{data.click17}} </p>
+  <p> <b>Laugh Out Loud:</b> {{data.click9}} <br> {{data.click10}} </p>
+  <p> <b>Listen To Music:</b> {{data.click11}} <br> {{data.click12}} <br> {{data.click13}} </p>
+  <p> <b>Get Moving:</b> {{data.click14}} <br> {{data.click15}} </p>
+  <p> <b>Be Grateful:</b> {{data.click16}} <br> {{data.click17}} </p>
   <p> <b>Five Senses Method:</b> {{data.click18}} </p>
-</ul>
+
+</div>
 {% endif %}
+
 <footer><center><p>Team Name: Invalid Syntax</p></center></footer>
   </body>
 </html>
