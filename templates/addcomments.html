@@ -1,0 +1,22 @@
+<!DOCTYPE>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style/main.css">
+</head>
+<body>
+
+  <h1>add a comment below</h1>
+  <form method = "POST">
+      <button>Refresh Chat <a href"/comments"></button>
+    <input name="comment"/><br/>
+      <button>Submit</button>
+      <br>
+  {% for i in mostRecent %}
+    <li> Message: {{i.comment}} <br> Time posted: {{i.created}} user: {{i.email}}</li>
+  {% endfor %}
+
+  </ul>
+  </form>
+</body>
+</html>

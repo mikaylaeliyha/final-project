@@ -183,7 +183,33 @@ class ResourceHandler (webapp2.RequestHandler):
         resources_template = jinja_env.get_template('templates/resources.html')
         self.response.write(resources_template.render())
 
+class comments(ndb.Model):
+    comment = ndb.StringProperty(required = True)
+    email = ndb.StringProperty(required = True)
+    created = ndb.DateTimeProperty(auto_now_add=True)
 
+
+
+class AddComments(webapp2.RequestHandler):
+    def get(self):
+        info_template = jinja_env.get_template('templates/addcomments.html')
+        mostRecent = comments.query().order(-comments.created).fetch(limit=25)
+        self.response.write(info_template.render({'mostRecent': mostRecent}))
+    def post(self):
+        info_details = jinja_env.get_template('templates/addcomments.html')
+    #    my_query = comment.query()
+        my_dict = {
+            'name': users.get_current_user().email(),
+            'comment': self.request.get("comment"),
+            'created': self.request.get("created"),
+            }
+        print my_dict
+        story = comments(comment = my_dict["comment"], email = my_dict['name'])
+        story.put()
+         # fieldObject = totalComment(comment = comment)
+         # totalComment.put()
+        mostRecent = comments.query().order(-comments.created).fetch(limit=25)
+        self.response.write(info_details.render({'mostRecent': mostRecent}))
 
 
 app = webapp2.WSGIApplication([
@@ -194,6 +220,7 @@ app = webapp2.WSGIApplication([
     ('/contact', ContactHandler),
     ('/contact3', Contact3Handler),
     ('/saved', SavedPage),
-    ('/discussion', DiscussionHandler),
+    ('/discussion', AddComments),
     ('/resources', ResourceHandler),
+    
 ], debug=True)
