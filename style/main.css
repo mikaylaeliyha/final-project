@@ -165,6 +165,7 @@ input[type=submit]:hover {
 .stuff {
   /* margin-left: 5px; */
   margin-right: 25px;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .other {
@@ -176,10 +177,19 @@ h3 {
   margin-left: 10px;
 }
 
-form {
+.method {
     font-family: 'Quicksand', sans-serif;
-    margin-left: 10px;
-    margin-right: 15px;
+    margin-left: 200px;
+    margin-right: 200px;
+    background-color: white;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 15px;
+    padding-bottom: 25px;
+}
+
+.bigger {
+  font-size: 25px
 }
 
 .background {
@@ -229,4 +239,10 @@ iframe {
 
 .dropdown:hover .dropbtn {
   background-color: #111;
+}
+
+footer {
+  font-family: 'Quicksand', sans-serif;
+  margin-left: 25px;
+  padding-top: 20px;
 }
