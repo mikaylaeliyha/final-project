@@ -209,7 +209,7 @@ class AddComments(webapp2.RequestHandler):
         me =  users.get_current_user()
     #    my_query = comment.query()
         my_dict = {
-            'name': users.get_current_user().email(),
+            'name': users.get_current_user().nickname(),
             'comment': self.request.get("comment"),
             'created': self.request.get("created"),
             }
